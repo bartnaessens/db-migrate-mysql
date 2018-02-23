@@ -118,6 +118,10 @@ var MysqlDriver = Base.extend({
       constraint.push('UNIQUE');
     }
 
+    if (spec.after && typeof(spec.after) === 'string') {
+      constraint.push('AFTER ' + this._escapeDDL + spec.after + this._escapeDDL)
+    }
+
     if (spec.engine && typeof(spec.engine) === 'string') {
       constraint.push('ENGINE=\'' + spec.engine + '\'')
     }
