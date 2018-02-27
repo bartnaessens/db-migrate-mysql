@@ -85,6 +85,8 @@ var MysqlDriver = Base.extend({
       len = spec.length ? util.format('(%s)', spec.length) : '';
       if (t === 'VARCHAR' && len === '') {
         len = '(255)';
+      } else if (Array.isArray(spec.length)) {
+        len = '(' + spec.length.map((entry) => `'${entry}'`) + ')';
       }
     }
     var constraint = this.createColumnConstraint(spec, options, tableName, name);
